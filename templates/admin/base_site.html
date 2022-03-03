@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %} 
+    {% block title %}
+        {% if subtitle %} {{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}
+    {% endblock %}
+
+    {% block branding %}
+        <h1 id="site-name">
+            <a href="{% url 'admin:index' %}">Detail Configuration Admin</a>
+        </h1>
+    {% endblock %}
+    
+    {% block userlinks %}
+        {% if site_url %}
+            <span>/</span>
+            <a href="{{ site_url }}">SDN</a> / {% endif %}
+
+            {% if user.is_active and user.is_staff %} {% url 'django-admindocs-docroot' as docsroot %}
+
+            {% if docsroot %} <a href="{{ docsroot }}">Documentation</a> / 
+
+            {% endif %}
+        {% endif %}
+
+        {% if user.has_usable_password %}
+            <a href="{% url 'admin:password_change' %}">Change password</a> / {% endif %}
+            <a href="{% url 'admin:logout' %}">Log out</a>
+    {% endblock %}
+    
+    {% block nav-global %}
+    
+    {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html'%} {%block switch_list%}{% load crispy_forms_tags %}
+<div class="container card col">
+  <br />
+  <div class="sidebar-heading"><b>EtherChannel Configurations</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-2">{{etherchannel.name|as_crispy_field}}</div>
+      <div class="col-md-3">
+        {{etherchannel.group_interface|as_crispy_field}}
+      </div>
+      <div class="col-md-2">
+        {{etherchannel.portchannel_number|as_crispy_field}}
+      </div>
+      <div class="col-md-2">
+        {{etherchannel.switchport_mode|as_crispy_field}}
+      </div>
+      <div class="col-md-3">{{etherchannel.vlan|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">{{etherchannel.group_vlan|as_crispy_field}}</div>
+      <div class="col-md-2">
+        {{etherchannel.group_portchannel|as_crispy_field}}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn btn-success">submit</button>
+        <a href="{% url 'etherchannel-list' %}" class="btn btn-secondary"
+          >back</a
+        >
+      </dvi>
+    </div>
+  </form>
+  <br />
+</div>
+{%endblock%}

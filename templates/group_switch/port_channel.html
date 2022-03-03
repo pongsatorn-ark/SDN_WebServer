@@ -1,0 +1,101 @@
+{%extends 'base.html'%} {%block group_dhcp%}
+<div class="col-xl-8 col-lg-7">
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Group Port Channel</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+          style="font-size: 13px"
+        >
+          <thead>
+            <tr align="center">
+              <th>Group ID</th>
+              <th>Group Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr align="center">
+              <th>Group ID</th>
+              <th>Group Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {%for i in data %}
+            <tr align="center">
+              <td>{{i.id}}</td>
+              <td>{{i.name}}</td>
+              <td align="center">
+                <a class="w3-button" href="/group_port_channel/edit/{{i.id}}"
+                  ><i class="fa fa-pencil-square" aria-hidden="true"></i>edit</a
+                >
+              </td>
+              <td align="center">
+                <a
+                  class="w3-button"
+                  id="delete"
+                  href="/group_port_channel/delete/{{i.id}}"
+                  >delete</a
+                >
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-4 col-lg-5">
+  <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+      class="
+        card-header
+        py-3
+        d-flex
+        flex-row
+        align-items-center
+        justify-content-between
+      "
+    >
+      <h6 class="m-0 font-weight-bold text-primary">New</h6>
+    </div>
+    <div class="card-body">
+      <form action="/group_port_channel/save/" method="POST">
+        {%csrf_token%}
+        <br />
+        <div class="container">
+          <div class="row">
+            <label> Group Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Group Name"
+              class="form-control"
+            />
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6" align="center">
+              <button type="submit" class="btn btn-success">Confirm</button>
+            </div>
+            <div class="col-md-6" align="center">
+              <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,33 @@
+{% extends 'base.html'%} {%block router_list%}{% load crispy_forms_tags %}
+<div class="container card col">
+  <br />
+  <div class="sidebar-heading"><b>Sub Interface Configurations</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-4">{{sub_interface.interface|as_crispy_field}}</div>
+      <div class="col-md-4">
+        {{sub_interface.sub_interface|as_crispy_field}}
+      </div>
+      <div class="col-md-4">{{sub_interface.vlan|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">{{sub_interface.address|as_crispy_field}}</div>
+      <div class="col-md-2">
+        {{sub_interface.group_intertrunk|as_crispy_field}}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn btn-success">submit</button>
+        <a href="{% url 'sub_interface-list' %}" class="btn btn-secondary"
+          >back</a
+        >
+      </dvi>
+    </div>
+  </form>
+  <br />
+</div>
+{%endblock%}

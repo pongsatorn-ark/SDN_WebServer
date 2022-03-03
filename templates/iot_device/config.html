@@ -1,0 +1,193 @@
+{% extends 'base.html'%} {%block config%}{% load crispy_forms_tags %}
+<div class="container card col">
+  <br />{% for i in data %}
+  <div class="row">
+    <dvi class="col-sm-12" align="right">
+      <button class="btn-sm btn-info">
+        <span>
+          <a href="{% url 'deploy-all' i.id %}" style="color: white"
+            >Deploy All</a
+          >
+        </span>
+      </button>
+      <button class="btn-sm btn-secondary">
+        <a href="/iot_device/" style="color: white">Back</a>
+      </button>
+    </dvi>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-md-6">{{iot.topic|as_crispy_field}}</div>
+    <div class="col-md-3">{{profile.name|as_crispy_field}}</div>
+    <div class="col-md-3">{{network_type.network_type|as_crispy_field}}</div>
+  </div>
+  <br />
+  <hr class="sidebar-divider my-0" />
+  <div class="sidebar-heading"><b>Basic Configuration</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-2">{{network.hostname|as_crispy_field}}</div>
+      <div class="col-md-2">{{profile.domain_name|as_crispy_field}}</div>
+      <div>
+        <div class="form-group">
+          <label><br /></label>
+          <div>
+            <button type="submit" class="btn-sm btn-info">
+              <a href="{% url 'hostname-domain' i.id %}">deploy</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <br />
+  <div class="row">
+    <div class="col-md-4">{{profile.domain_lookup|as_crispy_field}}</div>
+    <div class="col-md-4">{{profile.service_pwd|as_crispy_field}}</div>
+    <div class="col-md-4">{{profile.console|as_crispy_field}}</div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-4">{{profile.vty|as_crispy_field}}</div>
+    <div class="col-md-4">{{profile.ssh|as_crispy_field}}</div>
+    <div class="col-md-4">{{profile.neighbor|as_crispy_field}}</div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-4">{{profile.default_gateway|as_crispy_field}}</div>
+    <div class="col-md-6">{{profile.username|as_crispy_field}}</div>
+  </div>
+  <br />
+  <hr class="sidebar-divider my-0" />
+  <div class="sidebar-heading"><b>Interface</b></div>
+  <br />
+  <form action="" method="POST">
+    <button class="btn-sm btn-info">
+      <a href="{% url 'interface-all-deploy' i.id %}" style="color: white"
+        >Interface deploy all</a
+      >
+    </button>
+    <br />
+    <br />
+    {% for interface in interface %}
+
+    <div class="row">
+      <div class="col-md-2">
+        <input
+          type="text"
+          class="form-control"
+          value="{{interface.interface}}"
+          readonly
+        />
+        <br />
+      </div>
+      <div class="col-md-2">
+        <input
+          type="text"
+          class="form-control"
+          value="{% if interface.description == None %} - {% elif interface.description != None %} {{interface.description}} {% endif %}"
+          readonly
+        />
+        <br />
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          value="{% if interface.ip_netmask == None %} - {% elif interface.ip_netmask != None %} {{interface.ip_netmask}} {% endif %}"
+          readonly
+        />
+        <br />
+      </div>
+      <div class="col-md-1">
+        <input
+          type="text"
+          class="form-control"
+          value="{% if interface.status == 0 %} Down {% elif interface.status == 1 %} UP {% endif %}"
+          readonly
+        />
+        <br />
+      </div>
+      <div class="col-md-3">
+        <div>
+          <div class="form-group">
+            <div>
+              <button type="submit" class="btn-sm btn-info">
+                <a href="{% url 'interface-deploy' interface.id %}">deploy</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </form>
+  <br />
+  {% if i.network_type == "Router" %}
+  <hr class="sidebar-divider" />
+  <div class="sidebar-heading"><b>Router</b></div>
+  <br />
+  <div class="row">
+    <div class="col-md-3">{{profile.group_dhcp|as_crispy_field}}</div>
+    <div class="col-md-3">{{profile.group_intertrunk|as_crispy_field}}</div>
+    <div class="col-md-3">{{profile.group_routing|as_crispy_field}}</div>
+    <div class="col-md-3">{{profile.group_acl|as_crispy_field}}</div>
+  </div>
+  {% elif i.network_type == "Switch" %}
+  <hr class="sidebar-divider" />
+  <div class="sidebar-heading"><b>Switch</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %} {% for vlan in data %}
+    <div class="row">
+      <div class="col-md-3">{{profile.group_vlan|as_crispy_field}}</div>
+      <div>
+        <div class="form-group">
+          <label><br /></label>
+          <div>
+            <button type="submit" class="btn-sm btn-info">
+              <a href="{% url 'deploy-vlan' vlan.id %}">deploy</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </form>
+  <form action="" method="POST">
+    <div class="row">
+      <div class="col-md-3">{{profile.group_switchport|as_crispy_field}}</div>
+      <div>
+        <div class="form-group">
+          <label><br /></label>
+          <div>
+            <button type="submit" class="btn-sm btn-info">
+              <a href="#">deploy</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form action="" method="POST">
+    <div class="row">
+      <div class="col-md-3">{{profile.group_portchannel|as_crispy_field}}</div>
+      <div>
+        <div class="form-group">
+          <label><br /></label>
+          <div>
+            <button type="submit" class="btn-sm btn-info">
+              <a href="#">deploy</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <br />
+  {% endif %} {% endfor %}
+</div>
+{%endblock%}

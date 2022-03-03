@@ -1,0 +1,30 @@
+{%extends 'base.html'%} {%block iot_update%} {% load crispy_forms_tags %}
+<div class="container card col-8">
+  <form action="" method="POST">
+    {%csrf_token%}
+    <br />
+    <div class="row">
+      <div class="col-md-4">{{form.mac|as_crispy_field}}</div>
+      <div class="col-md-4">{{form.topic|as_crispy_field}}</div>
+      <div class="col-md-4">{{form.subscribe|as_crispy_field}}</div>
+    </div>
+    {{form.room|as_crispy_field}}
+    <div class="row">
+      <div class="col-md-6">{{form.profile|as_crispy_field}}</div>
+      <div class="col-md-6">{{form.network|as_crispy_field}}</div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn-sm btn-success btn-icon-split">
+          <span class="text">Confirm</span>
+        </button>
+        <button class="btn-sm btn-secondary">
+          <a href="/iot_device/" style="color: white">Back</a>
+        </button>
+      </dvi>
+    </div>
+    <br />
+  </form>
+</div>
+{%endblock%}

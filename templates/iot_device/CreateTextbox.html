@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>artdrinker</title>
+    <script type="text/javascript">
+      function CreateTextbox() {
+        var i = 1;
+        createTextbox.innerHTML =
+          createTextbox.innerHTML + "<input type=text name='mytxt'+ i/>";
+      }
+    </script>
+  </head>
+  <body>
+    <form name="form" action="post" method="">
+      <input type="button" value="clickHere" onClick="CreateTextbox()" />
+      <div id="createTextbox"></div>
+    </form>
+  </body>
+</html>

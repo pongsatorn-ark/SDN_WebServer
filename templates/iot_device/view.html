@@ -1,0 +1,141 @@
+{%extends 'base.html'%} {%block iot_header%}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">IoT</h1>
+  {% comment %} <a href="#" id="new" class="d-none d-sm-inline-block btn btn-sm btn-info
+    shadow-sm" style="margin-left: 970px">new</a> {% endcomment %}
+  <a href="{% url 'iot_new' %}" class="d-none d-sm-inline-block btn btn-sm btn-info
+    shadow-sm" style="margin-left: 970px">new</a>
+</div>
+{%endblock%} {%block iot_table%}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">DataTables iot</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table         
+        id="dataTable"
+        class="table table-striped table-bordered"
+        style="width: 100; font-size: 15px%">
+        <thead>
+          <tr align="center">
+            <th>MAC</th>
+            <th>Topic</th>
+            <th>Room</th>
+            <th>Profile</th>
+            <th>Network</th>
+            <!-- <th>Deploy</th> -->
+            <th>MGMT</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr align="center">
+            <th>MAC</th>
+            <th>Topic</th>
+            <th>Room</th>
+            <th>Profile</th>
+            <th>Network</th>
+            <!-- <th>Deploy</th> -->
+            <th>MGMT</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {%for i in data_all %}
+          <tr>
+            <td>{{i.mac}}</td>
+            <td>{{i.topic}}</td>
+            <td>{{i.room}}</td>
+            <td>{{i.profile}}</td>
+            <td>{{i.hostname}}</td>
+            <td align="center">
+              <a class="w3-button" href="{% url 'config' i.id i.profile_id i.network_type_id i.network_id %}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                configure</a>
+            </td>
+            <td align="center">
+              <a class="w3-button" href="/iot_update/{{i.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                edit</a>
+            </td>
+            <td align="center">
+              <a class="w3-button" id="delete" href="/iot_device/delete/{{i.id}}">delete</a>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{%endblock%} {%block iot_popup%}
+<div class="modal-content">
+  <div class="close-new">x</div>
+  <form action="/iot_device/iot_add/" method="POST">
+    {%csrf_token%}
+    <h6 style="text-align: left; font-family: verdana">MAC Address</h6>
+    <input type="text" name="mac" placeholder="MAC Address" class="form-control" style="margin-top: 15px" />
+    <h6 style="margin-top: 10px; text-align: left; font-family: verdana">
+      Topic
+    </h6>
+    <input type="text" name="topic" placeholder="Name" class="form-control" style="margin-top: 15px" />
+    <h6 style="margin-top: 10px; text-align: left; font-family: verdana">
+      Room
+    </h6>
+    <select name="room_id" class="form-control" style="width: 100%;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;">
+      <option selected disabled="true">-- Select Room ---</option>
+      {%for i in room%}
+      <option value="{{i.id}}" {% if i.id == room_id %} selected{% endif %}>{{i.room}}</option>
+      {%endfor%}
+    </select>
+    <h6 style="margin-top: 10px; text-align: left; font-family: verdana">
+      Profile
+    </h6>
+    <select name="profile_id" class="form-control" style="width: 100%;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;">
+      <option selected disabled="true">-- Select Profile ---</option>
+      {%for i in profile%}
+      <option value="{{i.id}}" {% if i.id == profile_id %} selected{% endif %}>{{i.name}}
+      </option>
+      {%endfor%}
+    </select>
+    <h6 style="margin-top: 10px; text-align: left; font-family: verdana">
+      Network Device
+    </h6>
+    <select name="network_id" class="form-control" style="width: 100%;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;">
+      <option selected disabled="true">-- Select Network Device ---</option>
+      {%for i in network%}
+      <option value="{{i.id}}" {% if i.id == network_id %} selected{% endif %}>{{i.hostname}}</option>
+      {%endfor%}
+    </select>
+    <button type="submit" class="btn btn-success btn-icon-split" style="margin-top: 20px; margin-right: 200px">
+      <span class="icon text-white-50">
+        <i class="fas fa-check"></i>
+      </span>
+      <span class="text">Confirm</span>
+    </button>
+    <button type="reset" class="btn btn-danger btn-icon-split" style="margin-top: 20px">
+      <span class="icon text-white-50">
+        <i class="fas fa-trash"></i>
+      </span>
+      <span class="text">Reset</span>
+    </button>
+  </form>
+</div>
+{%endblock%}

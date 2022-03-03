@@ -1,0 +1,23 @@
+{% extends 'base.html'%} {%block router_list%}{% load crispy_forms_tags %}
+<div class="container card col">
+  <br />
+  <div class="sidebar-heading"><b>EIGRP Name Configurations</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-2">{{eigrp_name.name|as_crispy_field}}</div>
+      <div class="col-md-2">{{eigrp_name.as_number|as_crispy_field}}</div>
+      <div class="col-md-3">{{eigrp_name.group_routing|as_crispy_field}}</div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn btn-success">submit</button>
+        <a href="{% url 'eigrp-list' %}" class="btn btn-secondary">back</a>
+      </dvi>
+    </div>
+  </form>
+  <br />
+</div>
+{%endblock%}

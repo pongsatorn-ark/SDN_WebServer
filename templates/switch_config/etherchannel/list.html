@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block header %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">EtherChannel Configurations</h1>
+  <a
+    href="{% url 'etherchannel-create' %}"
+    class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"
+    style="margin-left: 970px"
+    >new</a
+  >
+</div>
+{%endblock%} {% block switch_list %}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">EtherChannel List</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+        style="font-size: 15px"
+      >
+        <thead>
+          <tr align="center">
+            <th>Name</th>
+            <th>EtherChannel Number</th>
+            <th>Mode</th>
+            <th>VLAN</th>
+            <th>Group range VLAN</th>
+            <th>Group</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr align="center">
+            <th>Name</th>
+            <th>EtherChannel Number</th>
+            <th>Mode</th>
+            <th>VLAN</th>
+            <th>Group range VLAN</th>
+            <th>Group</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {%for i in etherchannel %}
+          <tr align="center">
+            <td>{{i.name}}</td>
+            <td>{{i.portchannel_number}}</td>
+            <td>{{i.switchport_mode}}</td>
+            <td>{{i.vlan}}</td>
+            <td>{{i.group_vlan}}</td>
+            <td>{{i.group_portchannel}}</td>
+            <td align="center">
+              <a class="btn btn-info" href="{% url 'etherchannel-edit' i.id %}"
+                >edit</a
+              >
+              <a
+                class="btn btn-warning"
+                href="{% url 'etherchannel-delete' i.id %}"
+                >delete</a
+              >
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

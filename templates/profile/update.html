@@ -1,0 +1,59 @@
+{%extends 'base.html'%}{%block profile_new%}{% load crispy_forms_tags %}
+<div class="container card col-8">
+  <div class="card-body">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">{{profile.name|as_crispy_field}}</div>
+        <div class="col-md-6">{{profile.domain_name|as_crispy_field}}</div>
+      </div>
+      <br />
+      <hr class="sidebar-divider my-0" />
+      <div class="sidebar-heading"><b>Basic Configuration</b></div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">{{profile.domain_lookup|as_crispy_field}}</div>
+        <div class="col-md-4">{{profile.service_pwd|as_crispy_field}}</div>
+        <div class="col-md-4">{{profile.console|as_crispy_field}}</div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">{{profile.vty|as_crispy_field}}</div>
+        <div class="col-md-4">{{profile.ssh|as_crispy_field}}</div>
+        <div class="col-md-4">{{profile.neighbor|as_crispy_field}}</div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">{{profile.default_gateway|as_crispy_field}}</div>
+        <div class="col-md-6">{{profile.username|as_crispy_field}}</div>
+      </div>
+      <hr class="sidebar-divider" />
+      <div class="sidebar-heading"><b>Router</b></div>
+      <br />
+      <div class="row">
+        <div class="col-md-3">{{profile.group_dhcp|as_crispy_field}}</div>
+        <div class="col-md-3">{{profile.group_intertrunk|as_crispy_field}}</div>
+        <div class="col-md-3">{{profile.group_routing|as_crispy_field}}</div>
+        <div class="col-md-3">{{profile.group_acl|as_crispy_field}}</div>
+      </div>
+      <hr class="sidebar-divider" />
+      <div class="sidebar-heading"><b>Switch</b></div>
+      <br />
+      <div class="row">
+        <div class="col-md-3">{{profile.group_vlan|as_crispy_field}}</div>
+        <div class="col-md-3">{{profile.group_switchport|as_crispy_field}}</div>
+        <div class="col-md-3">
+          {{profile.group_portchannel|as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" align="right">
+          <button type="submit" class="btn btn-success">submit</button>
+          <a href="{% url 'profile_list' %}" class="btn btn-secondary">back</a>
+        </div>
+      </div>
+      <br />
+    </form>
+  </div>
+</div>
+{%endblock%}

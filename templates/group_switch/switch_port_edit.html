@@ -1,0 +1,23 @@
+{%extends 'base.html'%} {%block group_dhcp_edit%}{% load crispy_forms_tags %}
+<div class="container card col-5">
+  <br />
+  <form action="" method="POST">
+    {%csrf_token%}
+    <div class="row">
+      <div class="col-md">{{form.name|as_crispy_field}}</div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn-sm btn-success btn-icon-split">
+          <span class="text">Confirm</span>
+        </button>
+        <button class="btn-sm btn-secondary">
+          <a href="/group_switch_port/" style="color: white">Back</a>
+        </button>
+      </dvi>
+    </div>
+    <br />
+  </form>
+</div>
+{%endblock%}

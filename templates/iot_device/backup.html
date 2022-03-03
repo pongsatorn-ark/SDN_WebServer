@@ -1,0 +1,130 @@
+<!-- {%block IoT_header%}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">IoT Device</h1>
+  <a href="/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+    ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
+  >
+</div>
+{%endblock%}
+<h1>{{mac}}</h1>
+{%block IoT1%}
+<div class="col-lg-12 mb-4">
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">List</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead align="center">
+            <tr style="font-size: 13px">
+              <th>MAC Address</th>
+              <th>Topic</th>
+              <th>Room</th>
+              <th>Profile</th>
+              <th>Network</th>
+              <th>Management</th>
+            </tr>
+          </thead>
+          <tfoot align="center">
+            <tr style="font-size: 13px">
+              <th>MAC Address</th>
+              <th>Topic</th>
+              <th>Room</th>
+              <th>Profile</th>
+              <th>Network</th>
+              <th>Management</th>
+            </tr>
+          </tfoot>
+          <tbody style="font-size: 14px">
+            {%for i in data %}
+            <tr>
+              <td>{{i.0}}</td>
+              <td>{{i.1}}</td>
+              <td>{{i.2}}</td>
+              <td>{{i.3}}</td>
+              <td>{{i.4}}</td>
+              <td align="center">
+                <a class="w3-button" data-toggle="modal" data-target="#myModal"
+                  >edit</a
+                >
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%} -->
+
+<!-- {%block IoT2%}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">New</h6>
+    </div>
+    <div class="card-body">
+        <form action="/iot_device/iot_add/" method="POST">
+            {%csrf_token%}
+            <div class="form-group">
+                <input type="text" class="form-control" name="mac" placeholder="MAC Address">
+                <p></p>
+                <input type="text" class="form-control" name="topic" placeholder="Topic">
+                <p></p>
+                <input type="text" class="form-control" name="room" placeholder="Room">
+                <p></p>
+                <input type="text" class="form-control" name="profile" placeholder="Profile">
+                <p></p>
+                <select name="network_id" class="form-control">
+                    <option selected disabled="true">-- Select Network Device ---</option>
+                    {%for i in data_select%}
+                    <option value="{{i.id_network}}" {% if i.id_network == network_id %} selected{% endif %}>
+                        {{i.hostname}}
+                    </option>
+                    {%endfor%}
+                </select>
+                <p></p>
+                <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Confirm</span>
+                </button>
+                <button type="reset" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Cancel</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
+
+{%block IoT3%}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Deploy Config</h6>
+        <form action="/iot_device/deploy/" method="POST">
+            {%csrf_token%}
+            <div class="form-group">
+                <input type="text" class="form-control" name="topic" placeholder="Topic">
+                <p></p>
+                <input type="text" class="form-control" name="command" placeholder="Command">
+                <p></p>
+                <button type="submit" class="btn btn-success btn-icon-split">Deploy</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+
+    </div>
+</div>
+{%endblock%} -->

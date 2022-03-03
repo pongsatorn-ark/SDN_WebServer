@@ -1,0 +1,25 @@
+{% extends 'base.html'%} {%block router_list%}{% load crispy_forms_tags %}
+<div class="container card col">
+  <br />
+  <div class="sidebar-heading"><b>Static Route Configurations</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-2">{{static.name|as_crispy_field}}</div>
+      <div class="col-md-6">
+        {{static.network_netmask_route|as_crispy_field}}
+      </div>
+      <div class="col-md-4">{{static.group_routing|as_crispy_field}}</div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn btn-success">submit</button>
+        <a href="{% url 'static-list' %}" class="btn btn-secondary">back</a>
+      </dvi>
+    </div>
+  </form>
+  <br />
+</div>
+{%endblock%}

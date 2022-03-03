@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block header %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">DHCP Configurations</h1>
+  <a
+    href="{% url 'dhcp-create' %}"
+    class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"
+    style="margin-left: 970px"
+    >new</a
+  >
+</div>
+{%endblock%} {% block router_list %}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">DHCP List</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+        style="font-size: 15px"
+      >
+        <thead>
+          <tr align="center">
+            <th>Pool Name</th>
+            <th>Network</th>
+            <th>Gataway</th>
+            <th>DNS</th>
+            <th>Domain Name</th>
+            <th>Group</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr align="center">
+            <th>Pool Name</th>
+            <th>Network</th>
+            <th>Gataway</th>
+            <th>DNS</th>
+            <th>Domain Name</th>
+            <th>Group</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {%for i in data %}
+          <tr align="center">
+            <td>{{i.dhcp_pool}}</td>
+            <td>{{i.network}}</td>
+            <td>{{i.default_router}}</td>
+            <td>{{i.dns_server}}</td>
+            <td>{{i.domain_name}}</td>
+            <td>{{i.group_dhcp}}</td>
+            <td align="center">
+              <a class="btn btn-info" href="{% url 'dhcp-edit' i.id %}">edit</a>
+              <a class="btn btn-warning" href="{% url 'dhcp-delete' i.id %}"
+                >delete</a
+              >
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

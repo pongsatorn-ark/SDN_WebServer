@@ -1,0 +1,63 @@
+{%extends 'base.html'%} {%block profile_header%}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+  <a
+    href="/profile/new/"
+    class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"
+    style="margin-left: 970px"
+    >new</a
+  >
+</div>
+{%endblock%} {%block profile_list%}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">DataTables Profile</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        id="dataTable"
+        class="table table-striped table-bordered"
+        style="width: 100; font-size: 15px%"
+      >
+        <thead>
+          <tr align="center">
+            <th>ID</th>
+            <th>Profile Name</th>
+            <th>Config</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr align="center">
+            <th>ID</th>
+            <th>Profile Name</th>
+            <th>Config</th>
+            <th>Delete</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {%for i in data %}
+          <tr align="center">
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td align="center">
+              <a class="w3-button" href="/profile/{{i.id}}"
+                ><i class="fa fa-pencil-square" aria-hidden="true"></i>edit</a
+              >
+            </td>
+            <td align="center">
+              <a class="w3-button" id="delete" href="/profile/delete/{{i.id}}"
+                >delete</a
+              >
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{%endblock%}

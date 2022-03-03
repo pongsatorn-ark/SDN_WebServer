@@ -1,0 +1,31 @@
+{% extends 'base.html'%} {%block router_list%}{% load crispy_forms_tags %}
+<div class="container card col">
+<br>
+  <div class="sidebar-heading"><b>DHCP Configurations</b></div>
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-4">{{form.excluded|as_crispy_field}}</div>
+      <div class="col-md-4">{{form.interface_helper|as_crispy_field}}</div>
+      <div class="col-md-4">{{form.helper_address|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">{{form.dhcp_pool|as_crispy_field}}</div>
+      <div class="col-md-2">{{form.network|as_crispy_field}}</div>
+      <div class="col-md-2">{{form.default_router|as_crispy_field}}</div>
+      <div class="col-md-2">{{form.dns_server|as_crispy_field}}</div>
+      <div class="col-md-2">{{form.domain_name|as_crispy_field}}</div>
+      <div class="col-md-2">{{form.group_dhcp|as_crispy_field}}</div>
+    </div>
+    <br />
+    <div class="row">
+      <dvi class="col-sm-12" align="right">
+        <button type="submit" class="btn btn-success">submit</button>
+        <a href="{% url 'dhcp-list' %}" class="btn btn-secondary">back</a>
+      </dvi>
+    </div>
+  </form>
+  <br />
+</div>
+{%endblock%}

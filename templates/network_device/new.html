@@ -1,0 +1,42 @@
+{%extends 'base.html'%}{%block network_device_new%}
+<div class="from-manage">
+    <button style="margin-left: 400px" class="btn-sm btn-secondary">
+        <a href="/network_device/" style="color: white">Back</a>
+    </button>
+    <form action="/network_device/save/" method="POST">
+        {%csrf_token%}
+        <div align="left">
+            <label>Hostname</label>
+            <input class="form-control" style="width: 400px" type="text" name="hostname" placeholder="Hostname" />
+            <br />
+            <label>Product Identification (PID)</label>
+            <input class="form-control" style="width: 400px" type="text" name="pid"
+                placeholder="Product Identification" /><br />
+            <label>Serial number (SN)</label>
+            <input class="form-control" style="width: 400px" type="text" name="sn" placeholder="Serial number" /><br />
+            <label>Interface Type</label>
+            <select name="interface_type" class="form-control">
+                <option selected disabled="true">-- Select Interface Type ---</option>
+                {%for i in data1%}
+                <option value="{{i.id}}" {% if i.id == interface_type_id %} selected{% endif %}>
+                    {{i.interface_type}}
+                </option>
+                {%endfor%}
+            </select>
+            <br>
+            <label>Network Type</label>
+            <select name="network_type" class="form-control">
+                <option selected disabled="true">-- Select Network Type ---</option>
+                {%for i in data2%}
+                <option value="{{i.id}}" {% if i.id == network_type_id %} selected{% endif %}>
+                    {{i.network_type}}
+                </option>
+                {%endfor%}
+            </select>
+            <p></p>
+        </div>
+        <button type="submit">submit</button>
+        <button type="reset">reset</button>
+    </form>
+</div>
+{%endblock%}

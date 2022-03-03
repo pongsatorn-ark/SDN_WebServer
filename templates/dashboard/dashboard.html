@@ -1,0 +1,66 @@
+{%extends 'base.html'%}{%block dashbord%}
+<form action="/deploy/" method="POST">
+  {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <input type="text" name="command" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <button type="submit" class="form-control">send</button>
+      </div>
+    </div>
+  </div>
+</form>
+<br />
+<br />
+<br />
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Event Log</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        id="dataTable"
+        class="table table-striped table-bordered"
+        style="width: 100; font-size: 15px%"
+      >
+        <thead>
+          <tr align="center">
+            <th>ID</th>
+            <th>Iot</th>
+            <th>Command</th>
+            <th>Begin</th>
+            <th>Finish</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr align="center">
+            <th>ID</th>
+            <th>Iot</th>
+            <th>Command</th>
+            <th>Begin</th>
+            <th>Finish</th>
+            <th>Status</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {%for i in data %}
+          <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.iot_id}}</td>
+            <td>{{i.command}}</td>
+            <td>{{i.start}}</td>
+            <td>{{i.end}}</td>
+            <td>{{i.status}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{%endblock%}
